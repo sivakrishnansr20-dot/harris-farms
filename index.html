@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Goat Farm - Premium Breeds</title>
+    <style>
+        /* CSS Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        :root {
+            --primary: #2c5e3b;
+            --primary-light: #e8f5e9;
+            --accent: #d4af37;
+            --dark: #2d3748;
+            --light: #f7fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 94, 59, 0.7), rgba(44, 94, 59, 0.8)), url('https://images.unsplash.com/photo-1524413840807-0c3cb6fa808d?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+            color: var(--white);
+            text-align: center;
+            padding: 6rem 2rem;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        .btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background-color: #c29d28;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--accent);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* Goat Listing Grid */
+        .goat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        .goat-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .goat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .goat-img {
+            width: 100%;
+            height: 200px;
+            background-color: #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0aec0;
+            font-weight: bold;
+            position: relative;
+        }
+        /* Fallback patterned icons/images via CSS styling */
+        .goat-img::before {
+            content: '🐐';
+            font-size: 4rem;
+        }
+        .goat-info {
+            padding: 1.5rem;
+        }
+        .goat-name {
+            font-size: 1.25rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .goat-tag {
+            display: inline-block;
+            background-color: var(--primary-light);
+            color: var(--primary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .goat-desc {
+            font-size: 0.95rem;
+            color: #4a5568;
+        }
+
+        /* Info Section (Location & Contact) */
+        .info-section {
+            background-color: var(--primary-light);
+            padding: 4rem 2rem;
+        }
+        .info-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        .info-box h3 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .info-box p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER & NAVIGATION -->
+    <header>
+        <div class="nav-container">
+            <div class="logo">🐐 My Premium Goat Farm</div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#breeds">Our Breeds</a></li>
+                    <li><a href="#contact">Contact & Location</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+        <h1>Welcome to Our Premium Goat Farm</h1>
+        <p>We raise healthy, high-quality, and certified diverse goat breeds for dairy, meat, and breeding purposes.</p>
+        <a href="#breeds" class="btn">View Our 20+ Breeds</a>
+    </section>
+
+    <!-- GOAT LISTING SECTION -->
+    <main class="container" id="breeds">
+        <h2 class="section-title">Our Goat Breeds</h2>
+        <div class="goat-grid">
+            <!-- 1 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dairy Breed</span>
+                    <h3 class="goat-name">Boer Goat</h3>
+                    <p class="goat-desc">Known for rapid growth and excellent carcass qualities, highly popular worldwide for meat production.</p>
+                </div>
+            </div>
+            <!-- 2 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dairy Breed</span>
+                    <h3 class="goat-name">Saanen Goat</h3>
+                    <p class="goat-desc">The largest of the dairy goat breeds, producing exceptional milk volumes with a calm temperament.</p>
+                </div>
+            </div>
+            <!-- 3 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dual Purpose</span>
+                    <h3 class="goat-name">Anglo-Nubian</h3>
+                    <p class="goat-desc">Recognizable by their long drooping ears. Excellent dual-purpose breed rich in milk butterfat content.</p>
+                </div>
+            </div>
+            <!-- 4 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dairy Breed</span>
+                    <h3 class="goat-name">Alpine Goat</h3>
+                    <p class="goat-desc">Highly adaptable and heavy milk yielders. Known for curiosity, resilience, and unique colors.</p>
+                </div>
+            </div>
+            <!-- 5 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dairy Breed</span>
+                    <h3 class="goat-name">Toggenburg</h3>
+                    <p class="goat-desc">Oldest registered dairy breed. Features distinct swiss markings and steady, long-lasting milk production.</p>
+                </div>
+            </div>
+            <!-- 6 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Meat Breed</span>
+                    <h3 class="goat-name">Kalahari Red</h3>
+                    <p class="goat-desc">Distinctly red-skinned, highly sun-resistant, hardy meat goat suited for rugged, dry conditions.</p>
+                </div>
+            </div>
+            <!-- 7 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Fiber Breed</span>
+                    <h3 class="goat-name">Angora Goat</h3>
+                    <p class="goat-desc">Produces luxurious mohair fleece. Requires proper grooming and specialized care for best fiber.</p>
+                </div>
+            </div>
+            <!-- 8 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Miniature / Pet</span>
+                    <h3 class="goat-name">Nigerian Dwarf</h3>
+                    <p class="goat-desc">Small-sized West African dairy goat. Exceptionally sweet milk, great family pets, and easy handling.</p>
+                </div>
+            </div>
+            <!-- 9 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dairy Breed</span>
+                    <h3 class="goat-name">LaMancha</h3>
+                    <p class="goat-desc">Famous for having uniquely short 'gopher' or 'elf' ears. Highly productive and affectionate dairy breed.</p>
+                </div>
+            </div>
+            <!-- 10 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Meat Breed</span>
+                    <h3 class="goat-name">Kiko Goat</h3>
+                    <p class="goat-desc">Bred for survival and rapid growth under natural conditions without intensive management.</p>
+                </div>
+            </div>
+            <!-- 11 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Meat / Dual</span>
+                    <h3 class="goat-name">Jamunapari</h3>
+                    <p class="goat-desc">An iconic Indian breed with a parrot-mouth appearance, tall stature, and solid multi-purpose value.</p>
+                </div>
+            </div>
+            <!-- 12 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Meat Breed</span>
+                    <h3 class="goat-name">Black Bengal</h3>
+                    <p class="goat-desc">Highly prolific breed yielding top-grade meat and premium quality skin leather.</p>
+                </div>
+            </div>
+            <!-- 13 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dairy Breed</span>
+                    <h3 class="goat-name">Oberhasli</h3>
+                    <p class="goat-desc">A Swiss dairy breed featuring a gorgeous chamois colored coat with neat black markings.</p>
+                </div>
+            </div>
+            <!-- 14 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Miniature Breed</span>
+                    <h3 class="goat-name">Pygmy Goat</h3>
+                    <p class="goat-desc">Compact, stocky, and incredibly playful. Primarily kept as companion animals and clearing brush.</p>
+                </div>
+            </div>
+            <!-- 15 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Meat / Hardiness</span>
+                    <h3 class="goat-name">Spanish Goat</h3>
+                    <p class="goat-desc">A highly resilient landrace breed capable of thriving in rough, brushy terrain with minimal care.</p>
+                </div>
+            </div>
+            <!-- 16 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Fiber Breed</span>
+                    <h3 class="goat-name">Cashmere Goat</h3>
+                    <p class="goat-desc">Produces down-soft cashmere wool beneath its outer hair. Valued deeply for winter shearing.</p>
+                </div>
+            </div>
+            <!-- 17 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Meat Breed</span>
+                    <h3 class="goat-name">Savanna Goat</h3>
+                    <p class="goat-desc">Large, muscular, pure white goats from South Africa engineered for extreme drought endurance.</p>
+                </div>
+            </div>
+            <!-- 18 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Rare Breed</span>
+                    <h3 class="goat-name">Bagot Goat</h3>
+                    <p class="goat-desc">One of the oldest semi-feral British breeds, beautiful with a black head and clean white body.</p>
+                </div>
+            </div>
+            <!-- 19 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Dairy Breed</span>
+                    <h3 class="goat-name">Guernsey Goat</h3>
+                    <p class="goat-desc">Rare golden-hued dairy goat known for gentle behavior and premium fat-rich golden milk.</p>
+                </div>
+            </div>
+            <!-- 20 -->
+            <div class="goat-card">
+                <div class="goat-img"></div>
+                <div class="goat-info">
+                    <span class="goat-tag">Meat / Local</span>
+                    <h3 class="goat-name">Malabari Goat</h3>
+                    <p class="goat-desc">Native to Southern India, highly prolific, regular twin/triplet births, excellent climate resilience.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- LOCATION & CONTACT SECTION -->
+    <section class="info-section" id="contact">
+        <div class="info-grid">
+            <div class="info-box">
+                <h3>📍 Our Location</h3>
+                <p><strong>Farm Name:</strong> Premium Goat Breeding Farm</p>
+                <p><strong>Address:</strong> Green Valley Agri Zone, Block B, Countryside Road</p>
+                <p><strong>Visiting Hours:</strong> Mon - Sat: 8:00 AM - 5:00 PM (Appointments Preferred)</p>
+            </div>
+            <div class="info-box">
+                <h3>📞 Contact Details</h3>
+                <p><strong>Phone:</strong> +1 (555) 019-2834</p>
+                <p><strong>Email:</strong> contact@premiumgoatfarm.local</p>
+                <p><strong>WhatsApp:</strong> Send us a message for price lists & inventory</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Premium Goat Farm. All Rights Reserved. Built with GitHub Pages.</p>
+    </footer>
+
+</body>
+</html>
